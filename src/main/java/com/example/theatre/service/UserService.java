@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
  * return value signals if the operation is successful
  */
 public class UserService {
-    private final UserRepository userRepository;
-    private final EncryptionService encryptionService;
+    private transient final UserRepository userRepository;
+    private transient final EncryptionService encryptionService;
     public UserService(UserRepository userRepository, EncryptionService encryptionService) {
         this.userRepository = userRepository;
         this.encryptionService = encryptionService;

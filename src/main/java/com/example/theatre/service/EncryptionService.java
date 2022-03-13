@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Shicheng Fang
  *
- * Encrption and decryption
+ * Encrption utilities
  *
  * */
 @Service
