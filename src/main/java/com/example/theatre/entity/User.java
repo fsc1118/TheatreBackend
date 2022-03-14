@@ -12,13 +12,22 @@ public class User {
     private Long U_id;
     private String username;
     private String password;
+    private String email;
+    private String phone;
+    private String city;
+    private String zip;
     public User() {}
 
-    public User(String name, String password) {
 
-        this.username = name;
-        this.password = password;
+    public User(String username, String encode, String email, String phone, String city, String zip) {
+        this.username = username;
+        this.password = encode;
+        this.email = email;
+        this.phone = phone;
+        this.city = city;
+        this.zip = zip;
     }
+
     public void setName(String name) {
         this.username = name;
     }
@@ -30,5 +39,37 @@ public class User {
     }
     public String getPassword() {
         return this.password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 }

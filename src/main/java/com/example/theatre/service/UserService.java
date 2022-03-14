@@ -25,11 +25,11 @@ public class UserService {
         return userRepository.findByUsername(username) != null;
     }
 
-    public boolean insertUser(String username, String password) {
+    public boolean insertUser(String username, String password, String email, String phone, String city, String zip) {
         if (isUserExist(username)) {
             return false;
         }
-        userRepository.save(new User(username, encryptionService.encode(password)));
+        userRepository.save(new User(username, encryptionService.encode(password), email, phone, city, zip));
         return true;
     }
 

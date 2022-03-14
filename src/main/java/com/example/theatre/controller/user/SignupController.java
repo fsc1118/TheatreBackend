@@ -2,6 +2,7 @@ package com.example.theatre.controller.user;
 import com.example.theatre.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,10 @@ import java.util.Map;
  *              {
  *                  "name": string,
  *                  "password": string,
+ *                  "phone": string,
+ *                  "zip": string,
+ *                  "city": string,
+ *                  "email": string
  *                  ...
  *              }
  *
@@ -35,7 +40,9 @@ import java.util.Map;
  *              }
  *_______________________________________________________________________________
  * */
+
 @RestController
+@CrossOrigin(origins = "*") /* remove in production mode*/
 public class SignupController {
 
     /* Dependency injection*/
@@ -45,13 +52,17 @@ public class SignupController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup", consumes = {"application/json"})
     private ResponseEntity login(@RequestBody Map<String, String> json) {
         String username = json.get("name");
         String password = json.get("password");
+        String email = json.get("email");
+        String phone = json.get("phone");
+        String city = json.get("city");
+        String zip = json.get("zip");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Map.of(
-                        "success", userService.insertUser(username, password)));
+                        "success", userService.insertUser(username, password, email, phone, city, zip)));
     }
 }

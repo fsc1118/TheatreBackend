@@ -2,6 +2,7 @@ package com.example.theatre.controller.user;
 import com.example.theatre.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,13 +39,14 @@ import java.util.Map;
  *___________________________________________________________________________
  * */
 @RestController
+@CrossOrigin(origins = "*") /* remove in production mode*/
 public class LoginController {
     private final UserService userService;
     private LoginController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", consumes = {"application/json"})
     private ResponseEntity login(@RequestBody Map<String, String> json) {
         String username = json.get("name");
         String password = json.get("password");
