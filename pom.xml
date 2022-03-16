@@ -52,6 +52,10 @@
                   <groupId>com.heroku.sdk</groupId>
                   <artifactId>heroku-maven-plugin</artifactId>
                   <version>3.0.3</version>
+                     <configuration>
+        <source>11</source>  <!-- same as <java.version> -->
+        <target>11</target>    <!-- same as <java.version> -->
+    </configuration>
             </plugin>
         </plugins>
     </build>
