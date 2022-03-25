@@ -28,18 +28,18 @@ public class RoomService {
      * @param roomId
      * @return room entity, or else null
      */
-    private Room isRoomExist(Long roomId) {
+    private Room isRoomExist(Integer roomId) {
         return roomRepository.findById(roomId).orElse(null);
     }
 
-    public boolean hasEmptySeats(Long roomId) {
+    public boolean hasEmptySeats(Integer roomId) {
         // if true, specified room has available seats. Otherwise, it has no available seats.
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new EntityNotFoundException(roomId.toString()));
         return room.getNumber_available_seats() != 0;
     }
 
-    public boolean insertRoom(Long roomId, Integer num_seats) {
+    public boolean insertRoom(Integer roomId, Integer num_seats) {
         if (isRoomExist(roomId) != null) {
             return false;
         }
@@ -47,7 +47,7 @@ public class RoomService {
         return true;
     }
 
-    public boolean deleteRoom(Long roomId) {
+    public boolean deleteRoom(Integer roomId) {
         if (isRoomExist(roomId) == null) {
             return false;
         }
