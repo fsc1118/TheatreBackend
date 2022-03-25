@@ -15,7 +15,7 @@ public class Room {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="room_id")
-    private Long room_id;
+    private Integer room_id;
 
     @Column(name="num_seats")
     private Integer number_of_seats;
@@ -37,11 +37,11 @@ public class Room {
         this.number_available_seats = number_available_seats;
     }
 
-    public Long getRoom_id() {
+    public Integer getRoom_id() {
         return room_id;
     }
 
-    public void setRoom_id(Long room_id) {
+    public void setRoom_id(Integer room_id) {
         this.room_id = room_id;
     }
 

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
-    Optional<Room> findById(Long id);
+public interface RoomRepository extends JpaRepository<Room, Integer> {
+    Optional<Room> findById(Integer id);
 }
