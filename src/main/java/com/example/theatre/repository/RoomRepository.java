@@ -14,6 +14,4 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
             value = "SELECT * FROM room r WHERE r.num_avail_seats <> 0",
             nativeQuery = true)
     List<Room> findAllNonFilledRooms();
-
-    Optional<Room> findById(Integer id);
 }
