@@ -44,7 +44,6 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "*") /* remove in production mode*/
 public class SignupController {
-
     /* Dependency injection*/
     private final UserService userService;
 
