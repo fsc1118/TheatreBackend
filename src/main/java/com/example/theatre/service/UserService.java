@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private transient final UserRepository userRepository;
     private transient final EncryptionService encryptionService;
+
     public UserService(UserRepository userRepository, EncryptionService encryptionService) {
         this.userRepository = userRepository;
         this.encryptionService = encryptionService;
@@ -25,7 +26,12 @@ public class UserService {
         return userRepository.findByUsername(username) != null;
     }
 
-    public boolean insertUser(String username, String password, String email, String phone, String city, String zip) {
+    public boolean insertUser(String username,
+                              String password,
+                              String email,
+                              String phone,
+                              String city,
+                              String zip) {
         if (isUserExist(username)) {
             return false;
         }
