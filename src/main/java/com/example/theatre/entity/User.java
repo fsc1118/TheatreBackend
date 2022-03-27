@@ -34,12 +34,15 @@ public class User {
     public void setName(String name) {
         this.username = name;
     }
+
     public String getName() {
         return username;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getPassword() {
         return this.password;
     }
