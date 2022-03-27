@@ -4,14 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="room")
-/*
- *
- * @author Min Lu
- *
- * Room entity.
- *
- */
 public class Room {
+    /**
+     * @author Min Lu
+     *
+     * Room entity.
+     */
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="room_id")
