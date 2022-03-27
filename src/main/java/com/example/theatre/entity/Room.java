@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="room")
-/**
+/*
  *
  * @author Min Lu
  *

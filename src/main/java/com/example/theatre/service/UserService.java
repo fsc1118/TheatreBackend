@@ -5,11 +5,10 @@ import com.example.theatre.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-/**
- *
+/*
  * @author Shicheng Fang
  *
- * Operations allowed for user's inforamtion.
+ * Operations allowed for user's information.
  *
  * return value signals if the operation is successful
  */
