@@ -1,6 +1,11 @@
 package com.example.theatre.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Min Lu
@@ -9,12 +14,11 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="room")
-public class Room {
-
+@Table(name = "Rooms")
+public class Room implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="room_id")
     private Integer room_id;
 
@@ -23,6 +27,9 @@ public class Room {
 
     @Column(name="num_avail_seats")
     private Integer number_available_seats;
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Seat> seats;
 
     public Room() {
     }
@@ -58,6 +65,27 @@ public class Room {
 
     public void setNumber_available_seats(Integer number_available_seats) {
         this.number_available_seats = number_available_seats;
+    }
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Objects.equals(room_id, room.room_id) && Objects.equals(number_of_seats, room.number_of_seats) && Objects.equals(number_available_seats, room.number_available_seats) && Objects.equals(seats, room.seats);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(room_id, number_of_seats, number_available_seats, seats);
     }
 
     @Override
