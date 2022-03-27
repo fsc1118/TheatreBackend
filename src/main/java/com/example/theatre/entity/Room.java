@@ -26,12 +26,10 @@ public class Room {
     }
 
     public Room(Integer number_of_seats) {
-        this.room_id = room_id;
         this.number_of_seats = number_of_seats;
     }
 
     public Room(Integer number_of_seats, Integer number_available_seats) {
-        this.room_id = room_id;
         this.number_of_seats = number_of_seats;
         this.number_available_seats = number_available_seats;
     }
