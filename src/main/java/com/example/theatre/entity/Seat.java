@@ -1,11 +1,19 @@
 package com.example.theatre.entity;
 
+import com.example.theatre.repository.RoomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "Seats")
 public class Seat implements Serializable {
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @EmbeddedId
     private SeatPK id;
@@ -20,19 +28,14 @@ public class Seat implements Serializable {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-    public Seat(SeatPK id, Room room, boolean isAvailable) {
-        this.id = id;
-        this.room = room;
-        this.isAvailable = isAvailable;
+    public Seat() {
     }
 
-    //    public Seat(Integer seat_num, Room room, boolean isAvailable) {
-//        this.seat_num = seat_num;
-//        this.room = room;
-//        this.isAvailable = isAvailable;
-//    }
-
-    public Seat(boolean isAvailable) {
+    public Seat(SeatPK id, boolean isAvailable) {
+        this.id = id;
+        this.room = this.roomRepository
+                .findById(id.getRoom_id())
+                .orElseThrow(() -> new EntityNotFoundException("Missing Room entry: " + id.getRoom_id()));
         this.isAvailable = isAvailable;
     }
 
@@ -43,14 +46,6 @@ public class Seat implements Serializable {
     public void setId(SeatPK id) {
         this.id = id;
     }
-
-    //    public Integer getSeat_num() {
-//        return seat_num;
-//    }
-//
-//    public void setSeat_num(Integer seat_num) {
-//        this.seat_num = seat_num;
-//    }
 
     public Room getRoom() {
         return room;
@@ -67,26 +62,26 @@ public class Seat implements Serializable {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Seat seat = (Seat) o;
-//        return isAvailable == seat.isAvailable && Objects.equals(seat_num, seat.seat_num) && Objects.equals(room, seat.room);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(seat_num, room, isAvailable);
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Seat{" +
-//                "seat_num=" + seat_num +
-//                ", room=" + room +
-//                ", isAvailable=" + isAvailable +
-//                '}';
-//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Seat seat = (Seat) o;
+        return isAvailable == seat.isAvailable && id.equals(seat.id) && room.equals(seat.room);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, room, isAvailable);
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "id=" + id +
+                ", room=" + room +
+                ", isAvailable=" + isAvailable +
+                '}';
+    }
 }
