@@ -60,4 +60,13 @@ public class Room {
     public void setNumber_available_seats(Integer number_available_seats) {
         this.number_available_seats = number_available_seats;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "room_id=" + room_id +
+                ", number_of_seats=" + number_of_seats +
+                ", number_available_seats=" + number_available_seats +
+                '}';
+    }
 }

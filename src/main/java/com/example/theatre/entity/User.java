@@ -1,23 +1,25 @@
 package com.example.theatre.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long U_id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
     private String email;
     private String phone;
     private String city;
     private String zip;
-    public User() {}
 
+    public User() {}
 
     public User(String username, String encode, String email, String phone, String city, String zip) {
         this.username = username;
