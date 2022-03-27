@@ -7,15 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ *
+ * @author Min Lu
+ *
+ * JPA Repository for the Room entity.
+ *
+ */
+
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
-    /**
-     *
-     * @author Min Lu
-     *
-     * JPA Repository for the Room entity.
-     *
-     */
     @Query(
             value = "SELECT * FROM room r WHERE r.num_avail_seats <> 0",
             nativeQuery = true)

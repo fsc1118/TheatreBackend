@@ -2,14 +2,16 @@ package com.example.theatre.entity;
 
 import javax.persistence.*;
 
+/**
+ * @author Min Lu
+ *
+ * Room entity.
+ */
+
 @Entity
 @Table(name="room")
 public class Room {
-    /**
-     * @author Min Lu
-     *
-     * Room entity.
-     */
+
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
