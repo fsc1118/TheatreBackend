@@ -12,7 +12,6 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "Rooms")
 public class Room implements Serializable {
 
     @Id
@@ -26,7 +25,7 @@ public class Room implements Serializable {
     @Column(name="num_avail_seats")
     private Integer number_available_seats;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Seat.class, mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Seat> seats;
 
     public Room() {

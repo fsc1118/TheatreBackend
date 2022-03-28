@@ -1,28 +1,18 @@
 package com.example.theatre.entity;
 
-import com.example.theatre.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
-@Table(name = "Seats")
 public class Seat implements Serializable {
-
-    @Autowired
-    private RoomRepository roomRepository;
 
     @EmbeddedId
     private SeatPK id;
 
-    @MapsId("room_id")
-    @ManyToOne
+    @ManyToOne(optional = false, targetEntity = Room.class)
     @JoinColumn(name = "room_id",
-            referencedColumnName = "room_id",
-            foreignKey = @ForeignKey(name = "FK__seats_rooms"))
+            foreignKey = @ForeignKey(name = "FK__seat_room"), insertable = false, updatable = false)
     private Room room;
 
     @Column(name = "is_available")
@@ -33,9 +23,6 @@ public class Seat implements Serializable {
 
     public Seat(SeatPK id, boolean isAvailable) {
         this.id = id;
-        this.room = this.roomRepository
-                .findById(id.getRoom_id())
-                .orElseThrow(() -> new EntityNotFoundException("Missing Room entry: " + id.getRoom_id()));
         this.isAvailable = isAvailable;
     }
 
@@ -80,7 +67,6 @@ public class Seat implements Serializable {
     public String toString() {
         return "Seat{" +
                 "id=" + id +
-                ", room=" + room +
                 ", isAvailable=" + isAvailable +
                 '}';
     }
