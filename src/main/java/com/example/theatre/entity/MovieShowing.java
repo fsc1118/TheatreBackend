@@ -1,11 +1,15 @@
 package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 public class MovieShowing implements Serializable {
 
@@ -40,38 +44,6 @@ public class MovieShowing implements Serializable {
     public MovieShowing(MovieShowingPK movieShowingPK,
                         Integer show_length_in_minutes) {
         this.movieShowingPK = movieShowingPK;
-        this.show_length_in_minutes = show_length_in_minutes;
-    }
-
-    public MovieShowingPK getMovieShowingPK() {
-        return movieShowingPK;
-    }
-
-    public void setMovieShowingPK(MovieShowingPK movieShowingPK) {
-        this.movieShowingPK = movieShowingPK;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public Integer getShow_length_in_minutes() {
-        return show_length_in_minutes;
-    }
-
-    public void setShow_length_in_minutes(Integer show_length_in_minutes) {
         this.show_length_in_minutes = show_length_in_minutes;
     }
 

@@ -1,4 +1,4 @@
-package com.example.theatre.controller.user;
+package com.example.theatre.controller.ticket;
 
 import com.example.theatre.entity.Seat;
 import com.example.theatre.service.SeatService;

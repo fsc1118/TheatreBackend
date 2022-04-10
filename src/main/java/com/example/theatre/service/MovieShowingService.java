@@ -1,6 +1,5 @@
 package com.example.theatre.service;
 
-import com.example.theatre.entity.*;
 import com.example.theatre.repository.MovieRepository;
 import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.RoomRepository;

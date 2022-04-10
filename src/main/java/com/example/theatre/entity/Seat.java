@@ -1,11 +1,15 @@
 package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 public class Seat implements Serializable {
 
@@ -23,22 +27,6 @@ public class Seat implements Serializable {
 
     public Seat(SeatPK id) {
         this.id = id;
-    }
-
-    public SeatPK getId() {
-        return id;
-    }
-
-    public void setId(SeatPK id) {
-        this.id = id;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
     }
 
     @Override

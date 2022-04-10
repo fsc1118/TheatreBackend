@@ -1,12 +1,16 @@
 package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 public class Movie {
 
     @Id
@@ -112,86 +116,6 @@ public class Movie {
         this.movie_length_in_minutes = movie_length_in_minutes;
         this.number_tickets_sold = number_tickets_sold;
         this.total_earnings = total_earnings;
-        this.ratings = ratings;
-    }
-
-    public Long getMovie_id() {
-        return movie_id;
-    }
-
-    public void setMovie_id(Long movie_id) {
-        this.movie_id = movie_id;
-    }
-
-    public String getMovie_name() {
-        return movie_name;
-    }
-
-    public void setMovie_name(String movie_name) {
-        this.movie_name = movie_name;
-    }
-
-    public Date getProduction_date() {
-        return production_date;
-    }
-
-    public void setProduction_date(Date production_date) {
-        this.production_date = production_date;
-    }
-
-    public String getMovie_summary() {
-        return movie_summary;
-    }
-
-    public void setMovie_summary(String movie_summary) {
-        this.movie_summary = movie_summary;
-    }
-
-    public String getImage_url() {
-        return image_url;
-    }
-
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getMovie_length_in_minutes() {
-        return movie_length_in_minutes;
-    }
-
-    public void setMovie_length_in_minutes(Integer movie_length_in_minutes) {
-        this.movie_length_in_minutes = movie_length_in_minutes;
-    }
-
-    public Integer getNumber_tickets_sold() {
-        return number_tickets_sold;
-    }
-
-    public void setNumber_tickets_sold(Integer number_tickets_sold) {
-        this.number_tickets_sold = number_tickets_sold;
-    }
-
-    public Double getTotal_earnings() {
-        return total_earnings;
-    }
-
-    public void setTotal_earnings(Double total_earnings) {
-        this.total_earnings = total_earnings;
-    }
-
-    public String getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(String ratings) {
         this.ratings = ratings;
     }
 

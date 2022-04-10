@@ -1,12 +1,16 @@
 package com.example.theatre.entity;
 
 import com.sun.istack.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Date;
 
+@Getter
+@Setter
 @Embeddable
 public class MovieShowingPK implements Serializable {
 
@@ -32,30 +36,6 @@ public class MovieShowingPK implements Serializable {
     public MovieShowingPK(Long movie_id, Integer room_id, Date show_datetime) {
         this.movie_id = movie_id;
         this.room_id = room_id;
-        this.show_datetime = show_datetime;
-    }
-
-    public Long getMovie_id() {
-        return movie_id;
-    }
-
-    public void setMovie_id(Long movie_id) {
-        this.movie_id = movie_id;
-    }
-
-    public Integer getRoom_id() {
-        return room_id;
-    }
-
-    public void setRoom_id(Integer room_id) {
-        this.room_id = room_id;
-    }
-
-    public Date getShow_datetime() {
-        return show_datetime;
-    }
-
-    public void setShow_datetime(Date show_datetime) {
         this.show_datetime = show_datetime;
     }
 

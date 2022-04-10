@@ -1,10 +1,11 @@
 package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -13,6 +14,8 @@ import java.util.Set;
  * Room entity.
  */
 
+@Getter
+@Setter
 @Entity
 public class Room implements Serializable {
 
@@ -45,38 +48,6 @@ public class Room implements Serializable {
     public Room(Integer number_of_seats, Integer number_available_seats) {
         this.number_of_seats = number_of_seats;
         this.number_available_seats = number_available_seats;
-    }
-
-    public Integer getRoom_id() {
-        return room_id;
-    }
-
-    public void setRoom_id(Integer room_id) {
-        this.room_id = room_id;
-    }
-
-    public Integer getNumber_of_seats() {
-        return number_of_seats;
-    }
-
-    public void setNumber_of_seats(Integer number_of_seats) {
-        this.number_of_seats = number_of_seats;
-    }
-
-    public Integer getNumber_available_seats() {
-        return number_available_seats;
-    }
-
-    public void setNumber_available_seats(Integer number_available_seats) {
-        this.number_available_seats = number_available_seats;
-    }
-
-    public Set<Seat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Set<Seat> seats) {
-        this.seats = seats;
     }
 
     @Override
