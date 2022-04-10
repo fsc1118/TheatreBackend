@@ -1,5 +1,7 @@
 package com.example.theatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,7 +28,12 @@ public class Room implements Serializable {
     private Integer number_available_seats;
 
     @OneToMany(targetEntity = Seat.class, mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Seat> seats;
+
+    @OneToMany(mappedBy = "room")
+    @JsonManagedReference
+    Set<MovieShowing> movieShowings;
 
     public Room() {
     }
@@ -70,19 +77,6 @@ public class Room implements Serializable {
 
     public void setSeats(Set<Seat> seats) {
         this.seats = seats;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Room room = (Room) o;
-        return Objects.equals(room_id, room.room_id) && Objects.equals(number_of_seats, room.number_of_seats) && Objects.equals(number_available_seats, room.number_available_seats) && Objects.equals(seats, room.seats);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(room_id, number_of_seats, number_available_seats, seats);
     }
 
     @Override

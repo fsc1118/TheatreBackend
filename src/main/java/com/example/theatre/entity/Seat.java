@@ -1,5 +1,7 @@
 package com.example.theatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,17 +15,14 @@ public class Seat implements Serializable {
     @ManyToOne(optional = false, targetEntity = Room.class)
     @JoinColumn(name = "room_id",
             foreignKey = @ForeignKey(name = "FK__seat_room"), insertable = false, updatable = false)
+    @JsonBackReference
     private Room room;
-
-    @Column(name = "is_available")
-    private boolean isAvailable;
 
     public Seat() {
     }
 
-    public Seat(SeatPK id, boolean isAvailable) {
+    public Seat(SeatPK id) {
         this.id = id;
-        this.isAvailable = isAvailable;
     }
 
     public SeatPK getId() {
@@ -42,32 +41,23 @@ public class Seat implements Serializable {
         this.room = room;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seat seat = (Seat) o;
-        return isAvailable == seat.isAvailable && id.equals(seat.id) && room.equals(seat.room);
+        return id.equals(seat.id) && room.equals(seat.room);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, room, isAvailable);
+        return Objects.hash(id, room);
     }
 
     @Override
     public String toString() {
         return "Seat{" +
                 "id=" + id +
-                ", isAvailable=" + isAvailable +
                 '}';
     }
 }
