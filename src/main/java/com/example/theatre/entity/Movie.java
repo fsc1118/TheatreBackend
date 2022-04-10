@@ -28,7 +28,7 @@ public class Movie {
     private String image_url;
 
     @Column(name = "visual_type")
-    private VisualType type;
+    private String type;
 
     @Column(name = "movie_length_in_mins")
     private Integer movie_length_in_minutes;
@@ -40,7 +40,7 @@ public class Movie {
     private Double total_earnings;
 
     @Column(name = "mpaa_rating")
-    private MPAARatings ratings;
+    private String ratings;
 
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference
@@ -61,13 +61,29 @@ public class Movie {
         this.ratings = null;
     }
 
+    public Movie(Long movie_id,
+                 String movie_name,
+                 Date production_date,
+                 String movie_summary,
+                 String image_url,
+                 String type,
+                 String ratings) {
+        this.movie_id = movie_id;
+        this.movie_name = movie_name;
+        this.production_date = production_date;
+        this.movie_summary = movie_summary;
+        this.image_url = image_url;
+        this.type = type;
+        this.ratings = ratings;
+    }
+
     public Movie(String movie_name,
                  Date production_date,
                  String movie_summary,
                  String image_url,
-                 VisualType type,
+                 String type,
                  Integer movie_length_in_minutes,
-                 MPAARatings ratings) {
+                 String ratings) {
         this.movie_name = movie_name;
         this.production_date = production_date;
         this.movie_summary = movie_summary;
@@ -83,11 +99,11 @@ public class Movie {
                   Date production_date,
                   String movie_summary,
                   String image_url,
-                  VisualType type,
+                  String type,
                   Integer movie_length_in_minutes,
                   Integer number_tickets_sold,
                   Double total_earnings,
-                  MPAARatings ratings) {
+                  String ratings) {
         this.movie_name = movie_name;
         this.production_date = production_date;
         this.movie_summary = movie_summary;
@@ -139,11 +155,11 @@ public class Movie {
         this.image_url = image_url;
     }
 
-    public VisualType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(VisualType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -171,50 +187,12 @@ public class Movie {
         this.total_earnings = total_earnings;
     }
 
-    public MPAARatings getRatings() {
+    public String getRatings() {
         return ratings;
     }
 
-    public void setRatings(MPAARatings ratings) {
+    public void setRatings(String ratings) {
         this.ratings = ratings;
-    }
-
-    public VisualType getVisualType(String type) {
-        VisualType result = null;
-        switch (type) {
-            case "2d": case "2D":
-                result = VisualType.TWO_D;
-                break;
-            case "3d": case "3D":
-                result = VisualType.THREE_D;
-                break;
-            case "4d": case "4D":
-                result = VisualType.FOUR_D;
-                break;
-        }
-        return result;
-    }
-
-    public MPAARatings getMPAARatings(String rating) {
-        MPAARatings result = null;
-        switch (rating) {
-            case "G": case "g":
-                result = MPAARatings.G;
-                break;
-            case "PG": case "pg":
-                result = MPAARatings.PG;
-                break;
-            case "PG-13": case "pg-13": case "pg13":
-                result = MPAARatings.PG_13;
-                break;
-            case "R": case "r":
-                result = MPAARatings.R;
-                break;
-            case "NC-17": case "nc-17": case "nc17":
-                result = MPAARatings.NC_17;
-                break;
-        }
-        return result;
     }
 
     @Override
