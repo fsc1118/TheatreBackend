@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * @author Min Lu
+ * @author Min Lu + Fang Shicheng
  *
  * Movie entity.
  */
