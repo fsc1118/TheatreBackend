@@ -27,13 +27,6 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public void insertNewRoom(int num_seats, int num_avail_seats) {
-        if (num_seats < num_avail_seats) {
-            throw new IllegalArgumentException("New Room Insertion: num_seats must be >= num_avail_seats.");
-        }
-        this.roomRepository.save(new Room(num_seats, num_avail_seats));
-    }
-
     public void deleteRoom(Integer room_id) {
         this.roomRepository.deleteById(room_id);
     }
