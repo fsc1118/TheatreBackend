@@ -1,140 +1,132 @@
 package com.example.theatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.Date;
+import java.util.Set;
 
+/**
+ * @author Min Lu
+ *
+ * Movie entity.
+ */
+
+@NoArgsConstructor
+@ToString
 @Entity
+@Getter
+@Setter
 public class Movie {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long M_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_id", nullable = false)
+    private Long movie_id;
 
-    @Column(nullable = false)
-    private String movieName;
+    @Column(name = "name", nullable = false)
+    private String movie_name;
 
-    private int productionYear;
+    @Column(name = "production_date")
+    private Date production_date;
 
-    public Movie() {
+    @Column(name = "summary")
+    @Lob
+    private String movie_summary;
 
+    @Column(name = "movie_poster_url")
+    private String image_url;
+
+    @Column(name = "visual_type")
+    private String type;
+
+    @Column(name = "movie_length_in_mins")
+    private Integer movie_length_in_minutes;
+
+    @Column(name = "num_tickets_sold")
+    private Integer number_tickets_sold;
+
+    @Column(name = "total_ticket_earnings")
+    private Double total_earnings;
+
+    @Column(name = "mpaa_rating")
+    private String ratings;
+
+    @OneToMany(mappedBy = "movie")
+    @JsonManagedReference
+    Set<MovieShowing> movieShowings;
+
+    @OneToMany(mappedBy = "movie")
+    @JsonManagedReference
+    private Set<Ticket> tickets;
+
+    public Movie(String movie_name) {
+        this.movie_name = movie_name;
+        this.production_date = null;
+        this.movie_summary = null;
+        this.image_url = null;
+        this.type = null;
+        this.movie_length_in_minutes = 0;
+        this.number_tickets_sold = 0;
+        this.total_earnings = 0.0;
+        this.ratings = null;
     }
 
-    public Movie(Long m_id, String movieName, int productionYear, int productionMonth, String summary, String visualType, int length, int ticketSold, int earning, double rating) {
-        M_id = m_id;
-        this.movieName = movieName;
-        this.productionYear = productionYear;
-        this.productionMonth = productionMonth;
-        this.summary = summary;
-        this.visualType = visualType;
-        this.length = length;
-        this.ticketSold = ticketSold;
-        this.earning = earning;
-        this.rating = rating;
+    public Movie(Long movie_id,
+                 String movie_name,
+                 Date production_date,
+                 String movie_summary,
+                 String image_url,
+                 String type,
+                 String ratings) {
+        this.movie_id = movie_id;
+        this.movie_name = movie_name;
+        this.production_date = production_date;
+        this.movie_summary = movie_summary;
+        this.image_url = image_url;
+        this.type = type;
+        this.ratings = ratings;
     }
 
-    private int productionMonth;
-
-    private String summary;
-
-    private String visualType;
-
-    private int length;
-
-    private int ticketSold;
-
-    private int earning;
-
-    private double rating;
-
-    public Long getM_id() {
-        return M_id;
+    public Movie(String movie_name,
+                 Date production_date,
+                 String movie_summary,
+                 String image_url,
+                 String type,
+                 Integer movie_length_in_minutes,
+                 String ratings) {
+        this.movie_name = movie_name;
+        this.production_date = production_date;
+        this.movie_summary = movie_summary;
+        this.image_url = image_url;
+        this.type = type;
+        this.movie_length_in_minutes = movie_length_in_minutes;
+        this.number_tickets_sold = 0;
+        this.total_earnings = 0.0;
+        this.ratings = ratings;
     }
 
-    public void setM_id(Long m_id) {
-        M_id = m_id;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public void setProductionYear(int productionYear) {
-        this.productionYear = productionYear;
-    }
-
-    public int getProductionMonth() {
-        return productionMonth;
-    }
-
-    public void setProductionMonth(int productionMonth) {
-        this.productionMonth = productionMonth;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getVisualType() {
-        return visualType;
-    }
-
-    public void setVisualType(String visualType) {
-        this.visualType = visualType;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public int getTicketSold() {
-        return ticketSold;
-    }
-
-    public void setTicketSold(int ticketSold) {
-        this.ticketSold = ticketSold;
-    }
-
-    public int getEarning() {
-        return earning;
-    }
-
-    public void setEarning(int earning) {
-        this.earning = earning;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return productionYear == movie.productionYear && productionMonth == movie.productionMonth && length == movie.length && ticketSold == movie.ticketSold && earning == movie.earning && Double.compare(movie.rating, rating) == 0 && M_id.equals(movie.M_id) && movieName.equals(movie.movieName) && summary.equals(movie.summary) && visualType.equals(movie.visualType);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(M_id, movieName, productionYear, productionMonth, summary, visualType, length, ticketSold, earning, rating);
+    public Movie(String movie_name,
+                  Date production_date,
+                  String movie_summary,
+                  String image_url,
+                  String type,
+                  Integer movie_length_in_minutes,
+                  Integer number_tickets_sold,
+                  Double total_earnings,
+                  String ratings) {
+        this.movie_name = movie_name;
+        this.production_date = production_date;
+        this.movie_summary = movie_summary;
+        this.image_url = image_url;
+        this.type = type;
+        this.movie_length_in_minutes = movie_length_in_minutes;
+        this.number_tickets_sold = number_tickets_sold;
+        this.total_earnings = total_earnings;
+        this.ratings = ratings;
     }
 }
