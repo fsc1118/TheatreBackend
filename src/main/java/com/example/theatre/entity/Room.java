@@ -36,7 +36,11 @@ public class Room implements Serializable {
 
     @OneToMany(mappedBy = "room")
     @JsonManagedReference
-    Set<MovieShowing> movieShowings;
+    private Set<MovieShowing> movieShowings;
+
+    @OneToMany(mappedBy = "room")
+    @JsonManagedReference
+    private Set<Ticket> tickets;
 
     public Room() {
     }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/seats")
+@RequestMapping("/api")
 public class SeatController {
 
     private final SeatService seatService;
@@ -22,7 +22,7 @@ public class SeatController {
         return seatService.findAll();
     }
 
-    @GetMapping("/all_seats_in_room_{id}")
+    @GetMapping("/seats/all_seats_in_room_{id}")
     public List<Integer> getSeatsFromRoom(@PathVariable Integer id) {
         return seatService.getAllSeatsFromRoom(id);
     }

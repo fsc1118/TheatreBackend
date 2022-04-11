@@ -50,6 +50,10 @@ public class Movie {
     @JsonManagedReference
     Set<MovieShowing> movieShowings;
 
+    @OneToMany(mappedBy = "movie")
+    @JsonManagedReference
+    private Set<Ticket> tickets;
+
     public Movie() {
     }
 

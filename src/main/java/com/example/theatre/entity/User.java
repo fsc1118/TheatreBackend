@@ -1,28 +1,43 @@
 package com.example.theatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 public class User {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long U_id;
 
-    @Column(nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "zip")
     private String zip;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private Set<Ticket> tickets;
 
     public User() {}
 
@@ -33,5 +48,10 @@ public class User {
         this.phone = phone;
         this.city = city;
         this.zip = zip;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }

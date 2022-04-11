@@ -1,12 +1,14 @@
 package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,6 +23,10 @@ public class Seat implements Serializable {
             foreignKey = @ForeignKey(name = "FK__seat_room"), insertable = false, updatable = false)
     @JsonBackReference
     private Room room;
+
+    @OneToMany(mappedBy = "seat")
+    @JsonManagedReference
+    private Set<Ticket> tickets;
 
     public Seat() {
     }
