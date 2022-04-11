@@ -1,9 +1,21 @@
 package com.example.theatre.entity;
 
+import com.example.theatre.composite_keys.SeatPK;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Set;
 
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
 @Entity
 public class Seat implements Serializable {
 
@@ -13,61 +25,14 @@ public class Seat implements Serializable {
     @ManyToOne(optional = false, targetEntity = Room.class)
     @JoinColumn(name = "room_id",
             foreignKey = @ForeignKey(name = "FK__seat_room"), insertable = false, updatable = false)
+    @JsonBackReference
     private Room room;
 
-    @Column(name = "is_available")
-    private boolean isAvailable;
+    @OneToMany(mappedBy = "seat")
+    @JsonManagedReference
+    private Set<Ticket> tickets;
 
-    public Seat() {
-    }
-
-    public Seat(SeatPK id, boolean isAvailable) {
+    public Seat(SeatPK id) {
         this.id = id;
-        this.isAvailable = isAvailable;
-    }
-
-    public SeatPK getId() {
-        return id;
-    }
-
-    public void setId(SeatPK id) {
-        this.id = id;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Seat seat = (Seat) o;
-        return isAvailable == seat.isAvailable && id.equals(seat.id) && room.equals(seat.room);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, room, isAvailable);
-    }
-
-    @Override
-    public String toString() {
-        return "Seat{" +
-                "id=" + id +
-                ", isAvailable=" + isAvailable +
-                '}';
     }
 }
