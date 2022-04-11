@@ -3,11 +3,13 @@ package com.example.theatre.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+@ToString
 @Entity
 @Getter
 @Setter
@@ -121,21 +123,5 @@ public class Movie {
         this.number_tickets_sold = number_tickets_sold;
         this.total_earnings = total_earnings;
         this.ratings = ratings;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movie_id=" + movie_id +
-                ", movie_name='" + movie_name + '\'' +
-                ", production_date=" + production_date +
-                ", movie_summary='" + movie_summary + '\'' +
-                ", image_url='" + image_url + '\'' +
-                ", type=" + type +
-                ", movie_length_in_minutes=" + movie_length_in_minutes +
-                ", number_tickets_sold=" + number_tickets_sold +
-                ", total_earnings=" + total_earnings +
-                ", ratings=" + ratings +
-                '}';
     }
 }

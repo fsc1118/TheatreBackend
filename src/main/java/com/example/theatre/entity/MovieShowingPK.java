@@ -3,12 +3,14 @@ package com.example.theatre.entity;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Date;
 
+@ToString
 @Getter
 @Setter
 @Embeddable
@@ -37,14 +39,5 @@ public class MovieShowingPK implements Serializable {
         this.movie_id = movie_id;
         this.room_id = room_id;
         this.show_datetime = show_datetime;
-    }
-
-    @Override
-    public String toString() {
-        return "MovieShowingPK{" +
-                "movie_id=" + movie_id +
-                ", room_id=" + room_id +
-                ", show_datetime=" + show_datetime +
-                '}';
     }
 }

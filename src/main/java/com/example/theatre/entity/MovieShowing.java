@@ -3,10 +3,12 @@ package com.example.theatre.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -44,13 +46,5 @@ public class MovieShowing implements Serializable {
                         Integer show_length_in_minutes) {
         this.movieShowingPK = movieShowingPK;
         this.show_length_in_minutes = show_length_in_minutes;
-    }
-
-    @Override
-    public String toString() {
-        return "MovieShowing{" +
-                "movieShowingPK=" + movieShowingPK +
-                ", show_length_in_minutes=" + show_length_in_minutes +
-                '}';
     }
 }

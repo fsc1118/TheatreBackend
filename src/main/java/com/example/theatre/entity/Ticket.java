@@ -3,10 +3,12 @@ package com.example.theatre.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -57,18 +59,4 @@ public class Ticket {
     @Column(name = "show_datetime")
     private Date show_datetime;
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "ticket_id=" + ticket_id +
-                ", user=" + user +
-                ", movie=" + movie +
-                ", room=" + room +
-                ", seat=" + seat +
-                ", price=" + price +
-                ", purchase_datetime=" + purchase_datetime +
-                ", is_used=" + is_used +
-                ", show_datetime=" + show_datetime +
-                '}';
-    }
 }

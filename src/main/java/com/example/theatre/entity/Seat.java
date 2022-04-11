@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -33,25 +34,5 @@ public class Seat implements Serializable {
 
     public Seat(SeatPK id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Seat seat = (Seat) o;
-        return id.equals(seat.id) && room.equals(seat.room);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, room);
-    }
-
-    @Override
-    public String toString() {
-        return "Seat{" +
-                "id=" + id +
-                '}';
     }
 }
