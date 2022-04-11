@@ -1,7 +1,8 @@
-package com.example.theatre.entity;
+package com.example.theatre.composite_keys;
 
 import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,6 +11,13 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Min Lu
+ *
+ * MovieShowing Composite Primary Key.
+ */
+
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -26,9 +34,6 @@ public class MovieShowingPK implements Serializable {
 
     @Column(name = "show_datetime")
     private Date show_datetime;
-
-    public MovieShowingPK() {
-    }
 
     public MovieShowingPK(Long movie_id, Integer room_id) {
         this.movie_id = movie_id;

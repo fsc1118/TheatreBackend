@@ -1,8 +1,7 @@
 package com.example.theatre.repository;
 import com.example.theatre.entity.Seat;
-import com.example.theatre.entity.SeatPK;
+import com.example.theatre.composite_keys.SeatPK;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

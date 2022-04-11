@@ -2,6 +2,7 @@ package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,6 +16,7 @@ import java.util.Set;
  * Room entity.
  */
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -43,9 +45,6 @@ public class Room implements Serializable {
     @OneToMany(mappedBy = "room")
     @JsonManagedReference
     private Set<Ticket> tickets;
-
-    public Room() {
-    }
 
     public Room(Integer number_of_seats) {
         this.number_of_seats = number_of_seats;

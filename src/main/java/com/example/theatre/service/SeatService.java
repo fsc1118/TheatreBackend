@@ -1,7 +1,7 @@
 package com.example.theatre.service;
 
 import com.example.theatre.entity.Seat;
-import com.example.theatre.entity.SeatPK;
+import com.example.theatre.composite_keys.SeatPK;
 import com.example.theatre.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

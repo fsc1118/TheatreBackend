@@ -2,12 +2,14 @@ package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -59,4 +61,10 @@ public class Ticket {
     @Column(name = "show_datetime")
     private Date show_datetime;
 
+    public Ticket(Double price, Date purchase_datetime, Boolean is_used, Date show_datetime) {
+        this.price = price;
+        this.purchase_datetime = purchase_datetime;
+        this.is_used = is_used;
+        this.show_datetime = show_datetime;
+    }
 }

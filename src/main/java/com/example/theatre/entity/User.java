@@ -2,12 +2,14 @@ package com.example.theatre.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -40,8 +42,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private Set<Ticket> tickets;
-
-    public User() {}
 
     public User(String username, String encode, String email, String phone, String city, String zip) {
         this.username = username;

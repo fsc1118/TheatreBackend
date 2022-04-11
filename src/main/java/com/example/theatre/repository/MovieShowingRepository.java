@@ -1,8 +1,7 @@
 package com.example.theatre.repository;
 
-import com.example.theatre.entity.Movie;
 import com.example.theatre.entity.MovieShowing;
-import com.example.theatre.entity.MovieShowingPK;
+import com.example.theatre.composite_keys.MovieShowingPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

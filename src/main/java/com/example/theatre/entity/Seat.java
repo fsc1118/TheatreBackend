@@ -1,8 +1,10 @@
 package com.example.theatre.entity;
 
+import com.example.theatre.composite_keys.SeatPK;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -28,9 +31,6 @@ public class Seat implements Serializable {
     @OneToMany(mappedBy = "seat")
     @JsonManagedReference
     private Set<Ticket> tickets;
-
-    public Seat() {
-    }
 
     public Seat(SeatPK id) {
         this.id = id;

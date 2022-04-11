@@ -1,13 +1,22 @@
 package com.example.theatre.entity;
 
+import com.example.theatre.composite_keys.MovieShowingPK;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * @author Min Lu
+ *
+ * MovieShowing entity.
+ */
+
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -34,9 +43,6 @@ public class MovieShowing implements Serializable {
 
     @Column(name = "show_length_in_mins")
     private Integer show_length_in_minutes;
-
-    public MovieShowing() {
-    }
 
     public MovieShowing(MovieShowingPK movieShowingPK) {
         this.movieShowingPK = movieShowingPK;
