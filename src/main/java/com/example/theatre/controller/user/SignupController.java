@@ -2,10 +2,7 @@ package com.example.theatre.controller.user;
 import com.example.theatre.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -16,7 +13,7 @@ import java.util.Map;
  *
  *                           Signup API doc
  * _________________________________________________________________________________
- *              URL: /signup
+ *              URL: /api/user/signup
  *              (HTTP) Method: Post. Otherwise, return HTTP Bad Request (400)
  *              HTTP Request Type: json
  *              HTTP Response Type: json
@@ -42,6 +39,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*") /* remove in production mode*/
+@RequestMapping("/api")
 public class SignupController {
     /* Dependency injection*/
     private final UserService userService;
@@ -50,7 +48,7 @@ public class SignupController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/signup", consumes = {"application/json"})
+    @PostMapping(value = "/user/signup", consumes = {"application/json"})
     private ResponseEntity login(@RequestBody Map<String, String> json) {
         String username = json.get("name");
         String password = json.get("password");
