@@ -13,7 +13,7 @@ import java.util.Map;
  *
  *                           Signup API doc
  * _________________________________________________________________________________
- *              URL: /signup
+ *              URL: /api/user/signup
  *              (HTTP) Method: Post. Otherwise, return HTTP Bad Request (400)
  *              HTTP Request Type: json
  *              HTTP Response Type: json

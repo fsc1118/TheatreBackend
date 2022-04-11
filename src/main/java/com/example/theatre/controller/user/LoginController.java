@@ -12,7 +12,7 @@ import java.util.Map;
  *
  *                           Login API doc
  * _________________________________________________________________________________
- *              URL: /login
+ *              URL: /api/user/login
  *
  *              (HTTP) Method: Post. Otherwise, return HTTP Bad Request (400)
  *
