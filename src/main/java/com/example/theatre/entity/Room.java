@@ -31,9 +31,6 @@ public class Room implements Serializable {
     @Column(name="num_seats")
     private Integer number_of_seats;
 
-    @Column(name="num_avail_seats")
-    private Integer number_available_seats;
-
     @OneToMany(targetEntity = Seat.class, mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Seat> seats;
@@ -48,10 +45,5 @@ public class Room implements Serializable {
 
     public Room(Integer number_of_seats) {
         this.number_of_seats = number_of_seats;
-    }
-
-    public Room(Integer number_of_seats, Integer number_available_seats) {
-        this.number_of_seats = number_of_seats;
-        this.number_available_seats = number_available_seats;
     }
 }

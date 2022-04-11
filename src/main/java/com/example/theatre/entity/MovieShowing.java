@@ -40,9 +40,11 @@ public class MovieShowing implements Serializable {
     @JsonBackReference
     Room room;
 
-
     @Column(name = "show_length_in_mins")
     private Integer show_length_in_minutes;
+
+    @Column(name="num_avail_seats")
+    private Integer number_available_seats;
 
     public MovieShowing(MovieShowingPK movieShowingPK) {
         this.movieShowingPK = movieShowingPK;
