@@ -47,9 +47,6 @@ public class MovieShowing implements Serializable {
     @Column(name="num_avail_seats")
     private Integer number_available_seats;
 
-    @Column(name="show_datetime")
-    private Date show_datetime;
-
     @Column(name="price")
     private Double price;
 
