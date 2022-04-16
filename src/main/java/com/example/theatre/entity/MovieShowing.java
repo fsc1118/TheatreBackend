@@ -9,6 +9,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Min Lu
@@ -46,13 +47,21 @@ public class MovieShowing implements Serializable {
     @Column(name="num_avail_seats")
     private Integer number_available_seats;
 
+    @Column(name="show_datetime")
+    private Date show_datetime;
+
+    @Column(name="price")
+    private Double price;
+
     public MovieShowing(MovieShowingPK movieShowingPK) {
         this.movieShowingPK = movieShowingPK;
     }
 
     public MovieShowing(MovieShowingPK movieShowingPK,
-                        Integer show_length_in_minutes) {
+                        Integer show_length_in_minutes,
+                        Double price) {
         this.movieShowingPK = movieShowingPK;
         this.show_length_in_minutes = show_length_in_minutes;
+        this.price = price;
     }
 }
