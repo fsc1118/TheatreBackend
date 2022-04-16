@@ -9,7 +9,8 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 /**
  * @author Min Lu
@@ -33,14 +34,14 @@ public class MovieShowingPK implements Serializable {
     private Integer room_id;
 
     @Column(name = "show_datetime")
-    private Date show_datetime;
+    private Timestamp show_datetime;
 
     public MovieShowingPK(Long movie_id, Integer room_id) {
         this.movie_id = movie_id;
         this.room_id = room_id;
     }
 
-    public MovieShowingPK(Long movie_id, Integer room_id, Date show_datetime) {
+    public MovieShowingPK(Long movie_id, Integer room_id, Timestamp show_datetime) {
         this.movie_id = movie_id;
         this.room_id = room_id;
         this.show_datetime = show_datetime;

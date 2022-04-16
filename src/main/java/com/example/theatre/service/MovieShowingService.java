@@ -6,7 +6,7 @@ import com.example.theatre.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -32,7 +32,7 @@ public class MovieShowingService {
         return this.movieShowingRepository.getAllShowingMovies();
     }
 
-    public List<Date> getAllShowingsOfMovie(String movie_name) {
+    public List<Timestamp> getAllShowingsOfMovie(String movie_name) {
         return this.movieShowingRepository.getAllMovieShowingsOfMovie(movie_name);
     }
 
