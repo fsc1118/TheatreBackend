@@ -7,8 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+/**
+ * Movie showing service to retrieve all currently showing movies.
+ *
+ * @author Min Lu
+ */
 
 @Service
 public class MovieShowingService {
@@ -29,20 +36,36 @@ public class MovieShowingService {
         this.roomRepository = roomRepository;
     }
 
+    private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private Timestamp parseTimestamp(String timestamp) {
+        try {
+            return new Timestamp(DATE_TIME_FORMAT.parse(timestamp).getTime());
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
     public List<String> getAllShowingMovies() {
         return this.movieShowingRepository.getAllShowingMovies();
+    }
+
+    public List<String> getAllShowingMovies(String date1, String date2) {
+        return this.movieShowingRepository.getAllShowingMoviesBetweenDate1AndDate2(parseTimestamp(date1),
+                parseTimestamp(date2));
+    }
+
+    public List<String> getAllShowingMoviesBeforeDate(String date) {
+        return this.movieShowingRepository.getAllShowingMoviesBeforeDate(parseTimestamp(date));
+    }
+
+    public List<String> getAllShowingMoviesAfterDate(String date) {
+        return this.movieShowingRepository.getAllShowingMoviesAfterDate(parseTimestamp(date));
     }
 
     public List<Timestamp> getAllShowingsOfMovie(String movie_name) {
         return this.movieShowingRepository.getAllMovieShowingsOfMovie(movie_name);
     }
 
-//    public void insertNewMovieShowing(Long movie_id, Integer room_id) {
-//        Optional<Movie> movie = this.movieRepository.findById(movie_id);
-//        Optional<Room> room = this.roomRepository.findById(room_id);
-//        if (movie.isPresent() && room.isPresent()) {
-////            System.out.println("Hello World!");
-//            this.movieShowingRepository.save(new MovieShowing(new MovieShowingPK(movie_id, room_id)));
-//        }
-//    }
+
 }
