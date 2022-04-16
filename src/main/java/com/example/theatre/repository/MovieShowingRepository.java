@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -25,5 +26,5 @@ public interface MovieShowingRepository extends JpaRepository<MovieShowing, Movi
 
     @Query(value = "SELECT ms.show_datetime FROM movie m JOIN movie_showing ms ON m.movie_id = ms.movie_id WHERE m.name = :movieName",
             nativeQuery = true)
-    List<Date> getAllMovieShowingsOfMovie(@Param("movieName") String movie_name);
+    List<Timestamp> getAllMovieShowingsOfMovie(@Param("movieName") String movie_name);
 }
