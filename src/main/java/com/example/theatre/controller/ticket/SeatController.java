@@ -17,20 +17,12 @@ public class SeatController {
         this.seatService = seatService;
     }
 
-<<<<<<< HEAD
-    @GetMapping
-=======
     @GetMapping("/seats")
->>>>>>> master
     public List<Seat> getAllSeats() {
         return seatService.findAll();
     }
 
-<<<<<<< HEAD
-    @GetMapping("/seats/all_seats_in_room_{id}")
-=======
     @GetMapping("/seats/{id}")
->>>>>>> master
     public List<Integer> getSeatsFromRoom(@PathVariable Integer id) {
         return seatService.getAllSeatsFromRoom(id);
     }
