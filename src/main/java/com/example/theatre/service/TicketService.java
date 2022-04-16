@@ -8,6 +8,12 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Class for servicing ticket requests.
+ *
+ * @author Min Lu
+ */
+
 @Service
 public class TicketService {
 
