@@ -19,11 +19,6 @@ public class MovieService {
         this.movieRepository = moviesRepository;
     }
 
-    public void insertNewMovie(String movie_name) {
-        Movie newMovies = new Movie(movie_name);
-        this.movieRepository.save(newMovies);
-    }
-
     @Transactional
     public List<MovieInstance> getAllMovies() {
         return this.movieRepository.getAllMovies();

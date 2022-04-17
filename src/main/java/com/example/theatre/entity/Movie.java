@@ -1,5 +1,6 @@
 package com.example.theatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 /**
@@ -32,7 +33,8 @@ public class Movie {
     private String movie_name;
 
     @Column(name = "production_date")
-    private Date production_date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/New_York")
+    private Timestamp production_date;
 
     @Column(name = "summary")
     @Lob
@@ -63,70 +65,4 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     @JsonManagedReference
     private Set<Ticket> tickets;
-
-    public Movie(String movie_name) {
-        this.movie_name = movie_name;
-        this.production_date = null;
-        this.movie_summary = null;
-        this.image_url = null;
-        this.type = null;
-        this.movie_length_in_minutes = 0;
-        this.number_tickets_sold = 0;
-        this.total_earnings = 0.0;
-        this.ratings = null;
-    }
-
-    public Movie(Long movie_id,
-                 String movie_name,
-                 Date production_date,
-                 String movie_summary,
-                 String image_url,
-                 String type,
-                 String ratings) {
-        this.movie_id = movie_id;
-        this.movie_name = movie_name;
-        this.production_date = production_date;
-        this.movie_summary = movie_summary;
-        this.image_url = image_url;
-        this.type = type;
-        this.ratings = ratings;
-    }
-
-    public Movie(String movie_name,
-                 Date production_date,
-                 String movie_summary,
-                 String image_url,
-                 String type,
-                 Integer movie_length_in_minutes,
-                 String ratings) {
-        this.movie_name = movie_name;
-        this.production_date = production_date;
-        this.movie_summary = movie_summary;
-        this.image_url = image_url;
-        this.type = type;
-        this.movie_length_in_minutes = movie_length_in_minutes;
-        this.number_tickets_sold = 0;
-        this.total_earnings = 0.0;
-        this.ratings = ratings;
-    }
-
-    public Movie(String movie_name,
-                  Date production_date,
-                  String movie_summary,
-                  String image_url,
-                  String type,
-                  Integer movie_length_in_minutes,
-                  Integer number_tickets_sold,
-                  Double total_earnings,
-                  String ratings) {
-        this.movie_name = movie_name;
-        this.production_date = production_date;
-        this.movie_summary = movie_summary;
-        this.image_url = image_url;
-        this.type = type;
-        this.movie_length_in_minutes = movie_length_in_minutes;
-        this.number_tickets_sold = number_tickets_sold;
-        this.total_earnings = total_earnings;
-        this.ratings = ratings;
-    }
 }

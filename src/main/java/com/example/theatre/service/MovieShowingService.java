@@ -1,9 +1,11 @@
 package com.example.theatre.service;
 
+import com.example.theatre.entity.MovieShowing;
 import com.example.theatre.repository.MovieRepository;
 import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.RoomRepository;
 import com.example.theatre.repository.projections.MovieInstance;
+import com.example.theatre.repository.projections.MovieShowingInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,8 +57,10 @@ public class MovieShowingService {
 
     @Transactional
     public List<MovieInstance> getAllShowingMoviesBetweenDates(String date1, String date2) {
-        return this.movieShowingRepository.getAllShowingMovies(parseTimestamp(date1),
-                parseTimestamp(date2));
+        return this.movieShowingRepository.getAllShowingMovies(
+                parseTimestamp(date1),
+                parseTimestamp(date2)
+        );
     }
 
     @Transactional
@@ -90,8 +94,14 @@ public class MovieShowingService {
         return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(null, parseTimestamp(date));
     }
 
-    public List<Timestamp> getAllShowingsOfMovie(String movie_name) {
-        return this.movieShowingRepository.getAllMovieShowingsOfMovie(movie_name);
+    @Transactional
+    public List<MovieShowingInstance> getAllShowingsOfMovie(Long movieId) {
+        return this.movieShowingRepository.getAllMovieShowingsOfMovie(movieId);
+    }
+
+    @Transactional
+    public List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId) {
+        return this.movieShowingRepository.getAllAvailableMovieShowingsOfMovie(movieId);
     }
 
 }

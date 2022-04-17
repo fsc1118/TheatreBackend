@@ -1,6 +1,7 @@
 package com.example.theatre.controller.movie;
 
 import com.example.theatre.repository.projections.MovieInstance;
+import com.example.theatre.repository.projections.MovieShowingInstance;
 import com.example.theatre.service.MovieShowingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,6 +87,16 @@ public class MovieShowingController {
                 .getAllShowingMoviesWithAvailSeatsAfterDate(
                         URLDecoder.decode(date, StandardCharsets.UTF_8.toString())
                 );
+    }
+
+    @GetMapping("/movieShowings/movie={movieId}")
+    public List<MovieShowingInstance> getAllShowingsOfMovie(@PathVariable("movieId") Long movie_id) {
+        return movieShowingService.getAllShowingsOfMovie(movie_id);
+    }
+
+    @GetMapping("/movieShowings/avail/movie={movieId}")
+    public List<MovieShowingInstance> getAllAvailableShowingsOfMovie(@PathVariable("movieId") Long movie_id) {
+        return movieShowingService.getAllAvailableMovieShowingsOfMovie(movie_id);
     }
 
 

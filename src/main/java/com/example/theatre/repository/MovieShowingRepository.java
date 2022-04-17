@@ -4,6 +4,7 @@ import com.example.theatre.entity.Movie;
 import com.example.theatre.entity.MovieShowing;
 import com.example.theatre.composite_keys.MovieShowingPK;
 import com.example.theatre.repository.projections.MovieInstance;
+import com.example.theatre.repository.projections.MovieShowingInstance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -28,14 +29,16 @@ public interface MovieShowingRepository extends JpaRepository<MovieShowing, Movi
     @Procedure(procedureName = "sp_getAllShowingMoviesWithAvail")
     List<MovieInstance> getAllShowingMoviesWithAvailableSeats(Timestamp beforeDate, Timestamp afterDate);
 
-    @Query(value = "SELECT ms.show_datetime FROM movie m " +
-                        "JOIN movie_showing ms ON m.movie_id = ms.movie_id " +
-                        "WHERE m.name = :movieName",
-            nativeQuery = true)
-    List<Timestamp> getAllMovieShowingsOfMovie(@Param("movieName") String movie_name);
+    @Procedure(procedureName = "sp_getMovieShowings")
+    List<MovieShowingInstance> getAllMovieShowingsOfMovie(Long movieId);
+
+    @Procedure(procedureName = "sp_getMovieShowingsWithAvail")
+    List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId);
 
     @Query(value = "SELECT count(*) FROM movie_showing ms " +
                         "WHERE ms.movie_id = :movieId AND ms.room_id = :roomId AND ms.show_datetime = :datetime",
             nativeQuery = true)
-    int checkIfMovieShowingExists(@Param("movieId") Long movie_id, @Param("roomId") Integer room_id, @Param("datetime") Timestamp dt);
+    int checkIfMovieShowingExists(@Param("movieId") Long movie_id,
+                                  @Param("roomId") Integer room_id,
+                                  @Param("datetime") Timestamp dt);
 }

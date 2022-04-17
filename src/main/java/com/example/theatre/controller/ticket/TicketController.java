@@ -33,8 +33,8 @@ public class TicketController {
         Long userId = Long.parseLong(json.get("user_id"));
 
         int res = ticketService.buyTicket(movieId, roomId, datetime, seatNum, userId);
-        if (res == 1) {
-            return new ResponseEntity<>("Seat not available", HttpStatus.BAD_REQUEST);
+        if (res == 1 || res == 2) {
+            return new ResponseEntity<>("Seat not available: " + json, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>("Ticket bought successfully!", HttpStatus.OK);
         }
