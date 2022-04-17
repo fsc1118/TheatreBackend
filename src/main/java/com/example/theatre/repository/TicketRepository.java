@@ -11,5 +11,5 @@ import java.util.Date;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     @Procedure(procedureName = "sp_buyTicket")
-    int addTicket(String movieName, Integer roomId, Date showDatetime, Integer seatNum, Long userId); // success = 0, not success = 1
+    int addTicket(Long movieId, Integer roomId, Date showDatetime, Integer seatNum, Long userId); // success = 0, not success = 1
 }

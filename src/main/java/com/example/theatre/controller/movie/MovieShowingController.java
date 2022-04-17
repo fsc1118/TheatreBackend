@@ -1,4 +1,4 @@
-package com.example.theatre.controller.ticket;
+package com.example.theatre.controller.movie;
 
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.service.MovieShowingService;

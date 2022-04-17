@@ -28,7 +28,8 @@ public class TicketService {
         }
     }
 
-    public int buyTicket(String movieName, Integer roomId, String showDatetime, Integer seatNum, Long userId) {
-        return ticketRepository.addTicket(movieName, roomId, parseTimestamp(showDatetime), seatNum, userId);
+    // Returns 0 with success, return 1 if not successful.
+    public int buyTicket(Long movieId, Integer roomId, String showDatetime, Integer seatNum, Long userId) {
+        return ticketRepository.addTicket(movieId, roomId, parseTimestamp(showDatetime), seatNum, userId);
     }
 }
