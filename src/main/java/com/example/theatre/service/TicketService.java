@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 @Service
 public class TicketService {
@@ -32,7 +31,6 @@ public class TicketService {
     // Returns 0 with success, return 1 if not successful.
     public int buyTicket(Long movieId, Integer roomId, String showDatetime, Integer seatNum, Long userId) {
         int res = ticketRepository.addTicket(movieId, roomId, showDatetime, seatNum, userId);
-//        System.out.println(res);
         return res;
     }
 }
