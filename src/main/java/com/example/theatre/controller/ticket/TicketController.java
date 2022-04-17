@@ -1,13 +1,17 @@
 package com.example.theatre.controller.ticket;
 
-import com.example.theatre.entity.Ticket;
 import com.example.theatre.service.TicketService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+
+/**
+ * API for buying tickets!
+ *
+ * @author Min Lu
+ */
 
 @RestController
 @CrossOrigin(origins = "*")

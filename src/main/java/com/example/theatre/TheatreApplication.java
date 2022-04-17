@@ -1,5 +1,6 @@
 package com.example.theatre;
 
+import com.example.theatre.controller.ticket.SeatController;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.service.MovieService;
 import com.example.theatre.service.MovieShowingService;
@@ -10,6 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -35,60 +38,22 @@ public class TheatreApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // new statements to test
+//        String url = URLDecoder.decode("2022-11-04%2020:00:00", StandardCharsets.UTF_8.toString());
+//        System.out.println(url);
+//        List<Integer> res1 = seatService.getAllAvailableSeatsOfMovieShowing(1L, 1, "2022-11-04 20:00:00");
+//        assert(res1 != null);
+//        List<Integer> res2 = seatService.getAllAvailableSeatsOfMovieShowing(1L, 1, "1989-11-04 20:00:00");
+//        assert (res2 == null);
+//        System.out.println("Both tests passed!");
 //
-//        this.movieService.insertNewMovie("Harry Potter and the Philosopher's Stone");
-//        this.movieService.insertNewMovie("Harry Potter and the Chamber of Secrets");
-//        this.movieService.insertNewMovie("Harry Potter and the Prisoners of Azkaban");
-//        this.movieService.insertNewMovie("Harry Potter and the Goblet of Fire");
-//
-//        this.roomService.insertNewRoom(300, 200);
-//        this.roomService.insertNewRoom(300, 20);
-//        this.roomService.insertNewRoom(300, 200);
-//        this.roomService.insertNewRoom(300, 0);
-//        this.roomService.insertNewRoom(300, 200);
-//        this.roomService.insertNewRoom(300, 0);
-//        this.roomService.insertNewRoom(300, 12);
-//        this.roomService.insertNewRoom(300, 0);
-//
-//        for (int i = 1; i < 21; i++) {
-//            this.seatService.insertNewSeat(i, 1);
-//        }
-//        for (int i = 1; i < 21; i++) {
-//            this.seatService.insertNewSeat(i, 2);
-//        }
+//        List<MovieInstance> m = movieService.getAllMovies();
+//        System.out.println(Arrays.toString(m.toArray()));
 
-//        this.movieShowingService.insertNewMovieShowing(1L, 1);
-//        this.movieShowingService.insertNewMovieShowing(2L, 2);
-//        this.movieShowingService.insertNewMovieShowing(3L, 1);
-//        this.movieShowingService.insertNewMovieShowing(4L, 1);
+        List<MovieInstance> ms = movieShowingService.getAllShowingMovies();
+        System.out.println(Arrays.toString(ms.toArray()));
 
-//        List<Room> result1 = this.roomService.findAllFilledRooms();
-//        System.out.println(Arrays.toString(result1.toArray()));
-//
-//        List<Room> result2 = this.roomService.findAllNonFilledRooms();
-//        System.out.println(Arrays.toString(result2.toArray()));
-//
-//        this.roomService.updateInitNumSeats(1, 1000);
-//        this.roomService.updateNumAvailSeats(7, 10);
-//
-//        List<Room> result3 = this.roomService.getAllRooms();
-//        for (Room r: result3) {
-//            System.out.println(r);
-//        }
-
-        List <String> result = this.movieShowingService.getAllShowingMovies();
-        System.out.println(Arrays.toString(result.toArray()));
-
-        System.out.println();
-        List <Date> result2 = this.movieShowingService.getAllShowingsOfMovie("Harry Potter and the Philosopher's Stone");
-        for (Date d: result2) {
-            System.out.println(d);
-        }
-
-        System.out.println();
-        List <MovieInstance> result3 = this.movieService.getAllMovies();
-        for (MovieInstance m: result3) {
-            System.out.println(m);
-        }
-    }
+        List<MovieInstance> ms2_between = movieShowingService.getAllShowingMoviesBetweenDates("2022-11-04 20:00:00", "2022-11-06 20:00:00");
+        System.out.println(Arrays.toString(ms2_between.toArray()));
+     }
 }
