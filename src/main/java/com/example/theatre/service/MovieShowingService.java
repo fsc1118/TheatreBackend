@@ -3,8 +3,10 @@ package com.example.theatre.service;
 import com.example.theatre.repository.MovieRepository;
 import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.RoomRepository;
+import com.example.theatre.repository.projections.MovieInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -46,26 +48,50 @@ public class MovieShowingService {
         }
     }
 
-    public List<String> getAllShowingMovies() {
-        return this.movieShowingRepository.getAllShowingMovies();
+    @Transactional
+    public List<MovieInstance> getAllShowingMovies() {
+        return this.movieShowingRepository.getAllShowingMovies(null, null);
     }
 
-    public List<String> getAllShowingMovies(String date1, String date2) {
-        return this.movieShowingRepository.getAllShowingMoviesBetweenDate1AndDate2(parseTimestamp(date1),
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesBetweenDates(String date1, String date2) {
+        return this.movieShowingRepository.getAllShowingMovies(parseTimestamp(date1),
                 parseTimestamp(date2));
     }
 
-    public List<String> getAllShowingMoviesBeforeDate(String date) {
-        return this.movieShowingRepository.getAllShowingMoviesBeforeDate(parseTimestamp(date));
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesBeforeDate(String date) {
+        return this.movieShowingRepository.getAllShowingMovies(parseTimestamp(date), null);
     }
 
-    public List<String> getAllShowingMoviesAfterDate(String date) {
-        return this.movieShowingRepository.getAllShowingMoviesAfterDate(parseTimestamp(date));
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesAfterDate(String date) {
+        return this.movieShowingRepository.getAllShowingMovies(null, parseTimestamp(date));
+    }
+
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesWithAvailSeats() {
+        return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(null, null);
+    }
+
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesWithAvailSeatsBetweenDate(String date1, String date2) {
+        return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(parseTimestamp(date1),
+                parseTimestamp(date2));
+    }
+
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesWithAvailSeatsBeforeDate(String date) {
+        return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(parseTimestamp(date), null);
+    }
+
+    @Transactional
+    public List<MovieInstance> getAllShowingMoviesWithAvailSeatsAfterDate(String date) {
+        return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(null, parseTimestamp(date));
     }
 
     public List<Timestamp> getAllShowingsOfMovie(String movie_name) {
         return this.movieShowingRepository.getAllMovieShowingsOfMovie(movie_name);
     }
-
 
 }
