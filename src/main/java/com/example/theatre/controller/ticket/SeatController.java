@@ -30,7 +30,7 @@ public class SeatController {
         return seatService.getAllSeatsFromRoom(id);
     }
 
-    @GetMapping("/seats/avail/{movieId}_{id}_{showDatetime}")
+    @GetMapping("/seats/avail/movie={movieId}_room={id}_dt={showDatetime}")
     public List<Integer> getAvailableSeatsFromRoom(@PathVariable Long movieId,
                                                    @PathVariable Integer id,
                                                    @PathVariable String showDatetime) throws UnsupportedEncodingException {

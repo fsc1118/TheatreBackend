@@ -104,4 +104,8 @@ public class MovieShowingService {
         return this.movieShowingRepository.getAllAvailableMovieShowingsOfMovie(movieId);
     }
 
+    @Transactional
+    public Double getTicketPrice(Long movieId, Integer roomId, String date) {
+        return this.movieShowingRepository.getTicketPrice(movieId, roomId, date);
+    }
 }

@@ -99,5 +99,17 @@ public class MovieShowingController {
         return movieShowingService.getAllAvailableMovieShowingsOfMovie(movie_id);
     }
 
+    // test with /api/movieShowings/movie=1_room=2_dt=2022-11-04%2020:00:00
+    @GetMapping(value = "/movieShowings/price/movie={movieId}_room={roomId}_dt={datetime}",
+                produces = "application/json")
+    public Double getMovieShowingPrice(@PathVariable Long movieId,
+                                       @PathVariable Integer roomId,
+                                       @PathVariable String datetime)
+            throws UnsupportedEncodingException {
 
+        return movieShowingService.getTicketPrice(
+                movieId,
+                roomId,
+                URLDecoder.decode(datetime, StandardCharsets.UTF_8.toString()));
+    }
 }

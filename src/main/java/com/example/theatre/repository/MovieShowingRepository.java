@@ -35,10 +35,15 @@ public interface MovieShowingRepository extends JpaRepository<MovieShowing, Movi
     @Procedure(procedureName = "sp_getMovieShowingsWithAvail")
     List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId);
 
+    @Procedure(procedureName = "sp_getMovieShowingPrice")
+    Double getTicketPrice(Long movie_id, Integer room_id, String datetime);
+
     @Query(value = "SELECT count(*) FROM movie_showing ms " +
                         "WHERE ms.movie_id = :movieId AND ms.room_id = :roomId AND ms.show_datetime = :datetime",
             nativeQuery = true)
     int checkIfMovieShowingExists(@Param("movieId") Long movie_id,
                                   @Param("roomId") Integer room_id,
                                   @Param("datetime") Timestamp dt);
+
+
 }
