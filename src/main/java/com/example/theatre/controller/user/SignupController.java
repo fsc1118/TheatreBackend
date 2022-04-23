@@ -49,7 +49,7 @@ public class SignupController {
     }
 
     @PostMapping(value = "/user/signup", consumes = {"application/json"})
-    private ResponseEntity login(@RequestBody Map<String, String> json) {
+    private ResponseEntity signup(@RequestBody Map<String, String> json) {
         String username = json.get("name");
         String password = json.get("password");
         String email = json.get("email");
