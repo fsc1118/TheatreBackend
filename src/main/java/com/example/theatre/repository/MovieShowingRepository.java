@@ -45,5 +45,4 @@ public interface MovieShowingRepository extends JpaRepository<MovieShowing, Movi
                                   @Param("roomId") Integer room_id,
                                   @Param("datetime") Timestamp dt);
 
-
 }
