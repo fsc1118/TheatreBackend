@@ -46,6 +46,39 @@ public class UserService {
         return encryptionService.isPasswordMatch(password, user.getPassword());
     }
 
+    public boolean editUser(User user) {
+        if (!isUserExist(user.getUsername())) {
+            return false;
+        }
+        User editedUser = userRepository.findById(user.getU_id()).orElse(null);
+        if (editedUser != null) {
+            if (user.getZip().length() > 0) {
+                editedUser.setZip(user.getZip());
+            }
+            if (user.getPhone().length() > 0) {
+                editedUser.setPhone(user.getPhone());
+            }
+            if (user.getCity().length() > 0) {
+                editedUser.setCity(user.getCity());
+            }
+            if (user.getEmail().length() > 0) {
+                editedUser.setEmail(user.getEmail());
+            }
+            if (user.getPassword().length() > 0) {
+                editedUser.setPassword(user.getPassword());
+            }
+            if (user.getUsername().length() > 0) {
+                editedUser.setUsername(user.getUsername());
+            }
+            userRepository.save(editedUser);
+        }
+        return true;
+    }
+
+    public void removeUser(Long user_id) {
+        userRepository.deleteById(user_id);
+    }
+
     public boolean changePassword(String username, String newPassword) {
         if (!isUserExist(username)) {
             return false;
