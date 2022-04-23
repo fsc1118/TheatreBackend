@@ -32,4 +32,8 @@ public interface MovieInstance {
     String getMovie_summary();
 
     String getType();
+
+    Double getTotal_earnings();
+
+    Integer getNumber_tickets_sold();
 }

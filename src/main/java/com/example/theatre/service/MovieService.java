@@ -20,6 +20,11 @@ public class MovieService {
     }
 
     @Transactional
+    public MovieInstance getMovieById(Long movie_id) {
+        return this.movieRepository.getMovieById(movie_id).get(0);
+    }
+
+    @Transactional
     public List<MovieInstance> getAllMovies() {
         return this.movieRepository.getAllMovies();
     }
