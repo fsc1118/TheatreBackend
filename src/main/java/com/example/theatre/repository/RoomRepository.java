@@ -23,8 +23,4 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     @Query("Select r.number_of_seats From Room r Where r.room_id =:roomId")
     Integer getNumSeats(@Param("roomId") Integer room_id);
 
-    @Modifying(clearAutomatically = true)
-    @Query("Update Room r Set r.number_of_seats =:num_seats Where r.room_id =:roomId")
-    void setNumSeats(@Param("roomId") Integer room_id, @Param("num_seats") Integer num_seats);
-
 }
