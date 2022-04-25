@@ -27,6 +27,9 @@ public class TheatreApplication implements CommandLineRunner {
     }
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private RoomService roomService;
 
     @Autowired
@@ -78,8 +81,11 @@ public class TheatreApplication implements CommandLineRunner {
 //        String url = URLDecoder.decode("2022-11-04%2020:00:00", StandardCharsets.UTF_8.toString());
 //        System.out.println(url);
 
-        MovieInstance res = movieService.getMovieById(1L);
-        System.out.println(res);
+//        MovieInstance res = movieService.getMovieById(1L);
+//        System.out.println(res);
+
+//        Long userid = userService.getUserId("helloworld");
+//        System.out.println(userid);
 
 
     }
