@@ -39,5 +39,4 @@ public class TicketController {
             return new ResponseEntity<>("Ticket bought successfully!", HttpStatus.OK);
         }
     }
-
 }
