@@ -23,6 +23,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping(path = "/user/{username}")
+    public Long getUserId(@PathVariable String username) {
+        return userService.getUserId(username);
+    }
+
     @PutMapping(path = "/user/{user_id}", consumes = {"application/json"})
     public ResponseEntity<User> updateUser(@PathVariable Long user_id,
                                            @RequestBody User userDetails) {

@@ -88,4 +88,9 @@ public class UserService {
         userRepository.save(user);
         return true;
     }
+
+    public Long getUserId(String username) {
+        User user = userRepository.findByUsername(username);
+        return user.getU_id();
+    }
 }
