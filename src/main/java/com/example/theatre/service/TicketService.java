@@ -3,6 +3,8 @@ package com.example.theatre.service;
 import com.example.theatre.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -29,6 +31,7 @@ public class TicketService {
     }
 
     // Returns 0 with success, return 1 if not successful.
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public int buyTicket(Long movieId, Integer roomId, String showDatetime, Integer seatNum, Long userId) {
         int res = ticketRepository.addTicket(movieId, roomId, showDatetime, seatNum, userId);
         return res;
