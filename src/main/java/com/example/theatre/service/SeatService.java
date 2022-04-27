@@ -6,6 +6,7 @@ import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
@@ -40,7 +41,7 @@ public class SeatService {
         return seatRepository.getAllSeats(room_id);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public List<Integer> getAllAvailableSeatsOfMovieShowing(Long movieId, Integer roomId, String showDatetime) {
         // check if movieshowing exists
         Timestamp ts = parseTimestamp(showDatetime);

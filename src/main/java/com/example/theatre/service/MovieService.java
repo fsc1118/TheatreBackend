@@ -5,6 +5,7 @@ import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,12 +20,12 @@ public class MovieService {
         this.movieRepository = moviesRepository;
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public MovieInstance getMovieById(Long movie_id) {
         return this.movieRepository.getMovieById(movie_id).get(0);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllMovies() {
         return this.movieRepository.getAllMovies();
     }
