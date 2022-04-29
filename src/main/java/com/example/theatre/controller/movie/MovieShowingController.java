@@ -2,6 +2,7 @@ package com.example.theatre.controller.movie;
 
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.projections.MovieShowingInstance;
+import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import com.example.theatre.service.MovieShowingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -111,5 +112,21 @@ public class MovieShowingController {
                 movieId,
                 roomId,
                 URLDecoder.decode(datetime, StandardCharsets.UTF_8.toString()));
+    }
+
+    @GetMapping(value = "/movieShowings/filter/date1={date1}_date2={date2}_title={title}")
+    public List<MovieShowingInstanceFilter> getFilteredMovieShowings(@PathVariable String date1,
+                                                                     @PathVariable String date2,
+                                                                     @PathVariable String title) {
+        if (date1.equals("none")) {
+            date1 = null;
+        }
+        if (date2.equals("none")) {
+            date2 = null;
+        }
+        if (title.equals("none")) {
+            title = null;
+        }
+        return this.movieShowingService.getFilteredMovieShowings(date1, date2, title);
     }
 }

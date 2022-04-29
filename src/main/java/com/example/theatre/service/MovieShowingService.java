@@ -6,6 +6,7 @@ import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.RoomRepository;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.projections.MovieShowingInstance;
+import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,11 @@ public class MovieShowingService {
     @Transactional
     public List<MovieInstance> getAllShowingMovies() {
         return this.movieShowingRepository.getAllShowingMovies(null, null);
+    }
+
+    @Transactional
+    public List<MovieShowingInstanceFilter>getFilteredMovieShowings(String month1, String month2, String title) {
+        return this.movieShowingRepository.getFilteredMovieShowings(month1, month2, title);
     }
 
     @Transactional

@@ -6,6 +6,7 @@ import com.example.theatre.entity.Ticket;
 import com.example.theatre.repository.MovieRepository;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.projections.MovieShowingInstance;
+import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import com.example.theatre.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -86,6 +87,9 @@ public class TheatreApplication implements CommandLineRunner {
 
 //        Long userid = userService.getUserId("helloworld");
 //        System.out.println(userid);
+
+//        List<MovieShowingInstanceFilter> res = movieShowingService.getFilteredMovieShowings("11", "11", "Harry");
+//        System.out.println(Arrays.toString(res.toArray()));
 
 
     }

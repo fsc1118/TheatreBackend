@@ -5,6 +5,7 @@ import com.example.theatre.entity.MovieShowing;
 import com.example.theatre.composite_keys.MovieShowingPK;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.projections.MovieShowingInstance;
+import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -34,6 +35,9 @@ public interface MovieShowingRepository extends JpaRepository<MovieShowing, Movi
 
     @Procedure(procedureName = "sp_getMovieShowingsWithAvail")
     List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId);
+
+    @Procedure(procedureName = "sp_filterShowingMoviesByDateAndTitleTicket")
+    List<MovieShowingInstanceFilter> getFilteredMovieShowings(String month1, String month2, String title);
 
     @Procedure(procedureName = "sp_getMovieShowingPrice")
     Double getTicketPrice(Long movie_id, Integer room_id, String datetime);
