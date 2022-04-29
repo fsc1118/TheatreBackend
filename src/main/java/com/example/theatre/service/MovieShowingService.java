@@ -1,11 +1,11 @@
 package com.example.theatre.service;
 
-import com.example.theatre.entity.MovieShowing;
 import com.example.theatre.repository.MovieRepository;
 import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.RoomRepository;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.projections.MovieShowingInstance;
+import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -54,6 +54,11 @@ public class MovieShowingService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllShowingMovies() {
         return this.movieShowingRepository.getAllShowingMovies(null, null);
+    }
+
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    public List<MovieShowingInstanceFilter>getFilteredMovieShowings(String month1, String month2, String title) {
+        return this.movieShowingRepository.getFilteredMovieShowings(month1, month2, title);
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
