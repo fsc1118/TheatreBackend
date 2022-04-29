@@ -6,9 +6,9 @@ import com.example.theatre.repository.MovieShowingRepository;
 import com.example.theatre.repository.RoomRepository;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.projections.MovieShowingInstance;
-import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
@@ -51,17 +51,12 @@ public class MovieShowingService {
         }
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllShowingMovies() {
         return this.movieShowingRepository.getAllShowingMovies(null, null);
     }
 
-    @Transactional
-    public List<MovieShowingInstanceFilter>getFilteredMovieShowings(String month1, String month2, String title) {
-        return this.movieShowingRepository.getFilteredMovieShowings(month1, month2, title);
-    }
-
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllShowingMoviesBetweenDates(String date1, String date2) {
         return this.movieShowingRepository.getAllShowingMovies(
                 parseTimestamp(date1),
@@ -69,48 +64,48 @@ public class MovieShowingService {
         );
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllShowingMoviesBeforeDate(String date) {
         return this.movieShowingRepository.getAllShowingMovies(parseTimestamp(date), null);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllShowingMoviesAfterDate(String date) {
         return this.movieShowingRepository.getAllShowingMovies(null, parseTimestamp(date));
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public List<MovieInstance> getAllShowingMoviesWithAvailSeats() {
         return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(null, null);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public List<MovieInstance> getAllShowingMoviesWithAvailSeatsBetweenDate(String date1, String date2) {
         return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(parseTimestamp(date1),
                 parseTimestamp(date2));
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public List<MovieInstance> getAllShowingMoviesWithAvailSeatsBeforeDate(String date) {
         return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(parseTimestamp(date), null);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public List<MovieInstance> getAllShowingMoviesWithAvailSeatsAfterDate(String date) {
         return this.movieShowingRepository.getAllShowingMoviesWithAvailableSeats(null, parseTimestamp(date));
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieShowingInstance> getAllShowingsOfMovie(Long movieId) {
         return this.movieShowingRepository.getAllMovieShowingsOfMovie(movieId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId) {
         return this.movieShowingRepository.getAllAvailableMovieShowingsOfMovie(movieId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public Double getTicketPrice(Long movieId, Integer roomId, String date) {
         return this.movieShowingRepository.getTicketPrice(movieId, roomId, date);
     }
