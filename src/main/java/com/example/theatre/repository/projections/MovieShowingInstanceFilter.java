@@ -3,7 +3,7 @@ package com.example.theatre.repository.projections;
 import java.sql.Timestamp;
 
 public interface MovieShowingInstanceFilter {
-    Long getMovie_id();
+    //Long getMovie_id();
 
     String getMovie_name();
 
