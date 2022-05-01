@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.theatre.repository.projections.PastPurchasesFilter;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service
 public class TicketService {
@@ -35,5 +37,10 @@ public class TicketService {
     public int buyTicket(Long movieId, Integer roomId, String showDatetime, Integer seatNum, Long userId) {
         int res = ticketRepository.addTicket(movieId, roomId, showDatetime, seatNum, userId);
         return res;
+    }
+
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    public List<PastPurchasesFilter>getFilteredPastPurchases(String userID, Double minprice, Double maxprice, String title) {
+        return this.ticketRepository.getFilteredPastPurchases(userID, minprice, maxprice, title);
     }
 }

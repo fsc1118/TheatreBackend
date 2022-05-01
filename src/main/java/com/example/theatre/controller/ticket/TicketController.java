@@ -4,8 +4,10 @@ import com.example.theatre.service.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.theatre.repository.projections.PastPurchasesFilter;
 
 import java.util.Map;
+import java.util.List;
 
 /**
  * API for buying tickets!
@@ -38,5 +40,13 @@ public class TicketController {
         } else {
             return new ResponseEntity<>("Ticket bought successfully!", HttpStatus.OK);
         }
+    }
+
+    @GetMapping(value = "/ticket/filter/userid={userid}_minprice={minprice}_maxprice={maxprice}_title={title}")
+    public List<PastPurchasesFilter> getFilteredMovieShowings(@PathVariable String userid,
+                                                              @PathVariable Double minprice,
+                                                              @PathVariable Double maxprice,
+                                                              @PathVariable String title) {                                         
+        return this.ticketService.getFilteredPastPurchases(userid, minprice, maxprice, title);
     }
 }
