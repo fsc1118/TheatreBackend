@@ -3,7 +3,7 @@ package com.example.theatre.service;
 import com.example.theatre.entity.User;
 import com.example.theatre.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
+import java.util.*;
 @Service
 /*
  * @author Shicheng Fang
@@ -46,32 +46,21 @@ public class UserService {
         return encryptionService.isPasswordMatch(password, user.getPassword());
     }
 
-    public boolean editUser(User user) {
-        if (!isUserExist(user.getUsername())) {
-            return false;
+    public boolean editUser(Map<String, String> map) {
+    	String username = map.getOrDefault("name", null);
+        String zip = map.getOrDefault("zip", null);
+        String phone = map.getOrDefault("phone", null);
+        String city = map.getOrDefault("city", null);
+        String email = map.getOrDefault("email", null);
+        if (username == null || zip == null || phone == null || city == null || email == null) {
+        	return false;
         }
-        User editedUser = userRepository.findById(user.getU_id()).orElse(null);
-        if (editedUser != null) {
-            if (user.getZip().length() > 0) {
-                editedUser.setZip(user.getZip());
-            }
-            if (user.getPhone().length() > 0) {
-                editedUser.setPhone(user.getPhone());
-            }
-            if (user.getCity().length() > 0) {
-                editedUser.setCity(user.getCity());
-            }
-            if (user.getEmail().length() > 0) {
-                editedUser.setEmail(user.getEmail());
-            }
-            if (user.getPassword().length() > 0) {
-                editedUser.setPassword(user.getPassword());
-            }
-            if (user.getUsername().length() > 0) {
-                editedUser.setUsername(user.getUsername());
-            }
-            userRepository.save(editedUser);
-        }
+        User user = userRepository.findByUsername(username);
+        user.setZip(zip);
+        user.setPhone(phone);
+        user.setCity(city);
+        user.setEmail(email);
+        userRepository.save(user);
         return true;
     }
 
@@ -92,5 +81,16 @@ public class UserService {
     public Long getUserId(String username) {
         User user = userRepository.findByUsername(username);
         return user.getU_id();
+    }
+
+    public Map<String, String> getUserInfo(String username) {
+        User user = userRepository.findByUsername(username);
+        Map<String, String> map = new HashMap<>();
+        map.put("name", String.valueOf(user.getUsername()));
+        map.put("zip", String.valueOf(user.getZip()));
+        map.put("email", String.valueOf(user.getEmail()));
+        map.put("phone", String.valueOf(user.getPhone()));
+        map.put("city", String.valueOf(user.getCity()));
+        return map;
     }
 }

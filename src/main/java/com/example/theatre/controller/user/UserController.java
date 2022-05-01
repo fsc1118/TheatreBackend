@@ -5,9 +5,9 @@ import com.example.theatre.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.*;
 /**
- * @author Min Lu
+ * @author Min Lu, Shicheng
  *
  * User api for updating and deleting user information.
  */
@@ -23,20 +23,24 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping(path = "/user/find/{username}")
+    public Map<String, String> getUserInfo(@PathVariable String username) {
+           return userService.getUserInfo(username);
+    }
+
     @GetMapping(path = "/user/{username}")
-    public Long getUserId(@PathVariable String username) {
+    public long getUserId(@PathVariable String username) {
         return userService.getUserId(username);
     }
 
-    @PutMapping(path = "/user/{user_id}", consumes = {"application/json"})
-    public ResponseEntity<User> updateUser(@PathVariable Long user_id,
-                                           @RequestBody User userDetails) {
-        boolean res = userService.editUser(userDetails);
 
-        if (!res) {
-            return new ResponseEntity<>(userDetails, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(userDetails, HttpStatus.OK);
+
+    @PostMapping(path = "/user", consumes = {"application/json"})
+    public ResponseEntity updateUser(@RequestBody Map<String, String> json) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(Map.of(
+                        "success", userService.editUser(json)));
     }
 
     @DeleteMapping("/user/{user_id}")
