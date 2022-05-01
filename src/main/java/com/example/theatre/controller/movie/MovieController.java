@@ -1,6 +1,5 @@
 package com.example.theatre.controller.movie;
 
-import com.example.theatre.entity.Movie;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.service.MovieService;
 import org.springframework.web.bind.annotation.*;
