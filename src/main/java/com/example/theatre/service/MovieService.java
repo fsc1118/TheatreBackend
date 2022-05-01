@@ -3,6 +3,8 @@ package com.example.theatre.service;
 import com.example.theatre.entity.Movie;
 import com.example.theatre.repository.projections.MovieInstance;
 import com.example.theatre.repository.MovieRepository;
+import com.example.theatre.repository.projections.MovieInstanceFilter;
+import com.example.theatre.repository.projections.MovieShowingInstanceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -29,4 +31,11 @@ public class MovieService {
     public List<MovieInstance> getAllMovies() {
         return this.movieRepository.getAllMovies();
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public List<MovieInstanceFilter>getFilteredMovies(String year, String title) {
+        return this.movieRepository.getFilteredMovies(year, title);
+    }
+
+
 }

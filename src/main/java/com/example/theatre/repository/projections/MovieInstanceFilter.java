@@ -2,9 +2,7 @@ package com.example.theatre.repository.projections;
 
 import java.sql.Timestamp;
 
-public interface MovieShowingInstanceFilter {
-    //Long getMovie_id();
-
+public interface MovieInstanceFilter {
     String getMovie_name();
 
     Timestamp getProduction_date();
@@ -18,8 +16,4 @@ public interface MovieShowingInstanceFilter {
     String getMovie_summary();
 
     String getType();
-
-    Timestamp getShow_datetime();
-
-    Integer getRoom_id();
 }
