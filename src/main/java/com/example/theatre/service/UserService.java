@@ -1,8 +1,13 @@
 package com.example.theatre.service;
 
+import com.example.theatre.entity.Ticket;
 import com.example.theatre.entity.User;
+import com.example.theatre.repository.TicketRepository;
 import com.example.theatre.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 @Service
 /*
@@ -14,10 +19,12 @@ import java.util.*;
  */
 public class UserService {
     private transient final UserRepository userRepository;
+    private transient final TicketRepository ticketRepository;
     private transient final EncryptionService encryptionService;
 
-    public UserService(UserRepository userRepository, EncryptionService encryptionService) {
+    public UserService(UserRepository userRepository, TicketRepository ticketRepository, EncryptionService encryptionService) {
         this.userRepository = userRepository;
+        this.ticketRepository= ticketRepository;
         this.encryptionService = encryptionService;
     }
 
@@ -64,7 +71,9 @@ public class UserService {
         return true;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void removeUser(Long user_id) {
+        ticketRepository.deleteTicketsOfUser(user_id);
         userRepository.deleteById(user_id);
     }
 

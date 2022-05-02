@@ -36,7 +36,7 @@ public interface MovieShowingRepository extends JpaRepository<MovieShowing, Movi
     @Procedure(procedureName = "sp_getMovieShowingsWithAvail")
     List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId);
 
-    @Procedure(procedureName = "sp_filterShowingMoviesByDateAndTitleTicket")
+    @Procedure(procedureName = "sp_filterShowingMoviesByDateAndTitle")
     List<MovieShowingInstanceFilter> getFilteredMovieShowings(String month1, String month2, String title);
 
     @Procedure(procedureName = "sp_getMovieShowingPrice")
