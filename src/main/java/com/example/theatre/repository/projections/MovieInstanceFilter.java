@@ -3,6 +3,8 @@ package com.example.theatre.repository.projections;
 import java.sql.Timestamp;
 
 public interface MovieInstanceFilter {
+    Long getMovie_id();
+
     String getMovie_name();
 
     Timestamp getProduction_date();

@@ -19,6 +19,8 @@ import java.sql.Timestamp;
  * END
  */
 public interface MovieInstance {
+    Long getMovie_id();
+
     String getMovie_name();
 
     Timestamp getProduction_date();
