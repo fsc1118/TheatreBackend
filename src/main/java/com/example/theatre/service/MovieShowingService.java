@@ -105,7 +105,7 @@ public class MovieShowingService {
         return this.movieShowingRepository.getAllMovieShowingsOfMovie(movieId);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public List<MovieShowingInstance> getAllAvailableMovieShowingsOfMovie(Long movieId) {
         return this.movieShowingRepository.getAllAvailableMovieShowingsOfMovie(movieId);
     }
