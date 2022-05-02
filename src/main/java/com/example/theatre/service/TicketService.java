@@ -39,7 +39,7 @@ public class TicketService {
         return res;
     }
 
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<PastPurchasesFilter>getFilteredPastPurchases(String userID, Double minprice, Double maxprice, String title) {
         return this.ticketRepository.getFilteredPastPurchases(userID, minprice, maxprice, title);
     }

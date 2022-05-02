@@ -61,7 +61,7 @@ public class MovieShowingService {
         return this.movieShowingRepository.getFilteredMovieShowings(month1, month2, title);
     }
 
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public List<MovieInstance> getAllShowingMoviesBetweenDates(String date1, String date2) {
         return this.movieShowingRepository.getAllShowingMovies(
                 parseTimestamp(date1),

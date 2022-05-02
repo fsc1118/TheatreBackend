@@ -71,7 +71,7 @@ public class UserService {
         return true;
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void removeUser(Long user_id) {
         ticketRepository.deleteTicketsOfUser(user_id);
         userRepository.deleteById(user_id);
